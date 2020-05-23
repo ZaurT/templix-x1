@@ -3,6 +3,8 @@
 // #############################
 var Chartist = require("chartist");
 
+var echarts = require('echarts');
+
 // ##############################
 // // // variables used to create animation on charts
 // #############################
@@ -183,8 +185,196 @@ const completedTasksChart = {
   }
 };
 
+const barChartData = {
+  option:
+    {
+      grid: {
+        top: '6%',
+        left: '1%',
+        right: '3%',
+        bottom: '3%',
+        containLabel: true
+    },
+    tooltip: {
+      trigger: 'none',
+      axisPointer: {
+          type: 'cross'
+      }
+    },
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        axisLine: {
+          show: false
+        },
+        axisTick: {
+            show: false
+        },
+        splitLine: {
+            lineStyle: {
+                type: 'dashed',
+                color: '#eee'
+            }
+        },
+      }
+    ],
+    yAxis: [
+      {
+          type: 'value',
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+              show: false
+          },
+          splitLine: {
+            lineStyle: {
+                  type: 'dashed',
+                  color: '#eee'
+              }
+          },
+      }
+    ],
+    series: [
+        {
+            name: 'Data',
+            type: 'line',
+            stack: 'Data1',
+            lineStyle: {
+              width: 2,
+              shadowColor: 'rgba(244, 67, 54 ,1)',
+              shadowBlur: 8,
+              shadowOffsetY: 0
+            },
+            label: {
+                normal: {
+                    show: false,
+                    position: 'top'
+                }
+            },
+            smooth: true,
+            itemStyle: {
+              color: 'rgb(244, 67, 54)'
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgb(244, 67, 54)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(255, 255, 255, 0)'
+                }])
+            },
+            data: [820, 1200, 834, 1450, 1600]
+        }
+    ]
+  }
+}
+
+/* PIE CHART DATA */
+
+
+let chartData1 = [
+  {value:12, onSale: 9, capability: 1500, purchases: 156000, proceeds: 400000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1},
+  {value:9, onSale: 7, capability: 1100, purchases: 156000, proceeds: 400300, stock: 1, oldPrice: 1, inSystem: 1, inProgram: 1},
+  {value:7, onSale: 7, capability: 1500, purchases: 156000, proceeds: 100000, stock: 0, oldPrice: 0, inSystem: 1, inProgram: 1},
+  {value:6, onSale: 4, capability: 1500, purchases: 156000, proceeds: 400000, stock: 0, oldPrice: 5, inSystem: 1, inProgram: 1},
+  {value:5, onSale: 4, capability: 1500, purchases: 156000, proceeds: 400000, stock: 0, oldPrice: 5, inSystem: 1, inProgram: 1},
+];
+let chartData2 = [
+  {value:4, onSale: 3, capability: 1500, purchases: 0, proceeds: 800000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1, selected: true},
+  {value:2, onSale: 1, capability: 1200, purchases: 0, proceeds: 100000, stock: 1, oldPrice: 1, inSystem: 1, inProgram: 1, selected: true},
+  {value:2, onSale: 2, capability: 1100, purchases: 0, proceeds: 5000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1, selected: true},
+];
+let gapSize = 5; //percentage
+let chartColors = [
+  "#a4d46d", 
+  "#e1e872", 
+  "#ffe16e", 
+  "#ffc247", 
+  "#f99090", 
+  "#ff5858"
+];
+// render colors
+Array.prototype.colors = function (arr) {
+  for ( var i = 0; i < arr.length; i++ ) {
+      arr[i]['itemStyle'] = {
+        color: chartColors[i]
+      }
+  }
+  return arr
+}
+chartColors.colors(chartData1);
+chartColors.colors(chartData2);
+
+let gapParam = {
+  value: "0", 
+  tooltip : {
+      show: false
+  },
+  label:{
+      formatter: "",
+      position : 'inner',
+  },
+  itemStyle: {
+      color: 'rgba(0,0,0,0)',
+      opacity: 0,
+      borderWidth: 0,
+  }
+}
+
+chartData1.push(gapParam);
+chartData2.push(gapParam);
+
+let chartData = chartData1.concat(chartData2);
+
+const pieChartData = {
+    option: {
+      calculable : false,
+      
+      series : [
+          {
+              name:'Source',
+              type:'pie',
+              minAngle: gapSize,
+              clockwise: true,
+              radius : ['30%', '90%'],
+              label: {
+                  normal: {
+                      color: "#000",
+                      formatter: "{a| {@value} } \n {b| {d}% }",
+                      rich: {
+                          a: {
+                              color: "#000",
+                              fontSize: 14,
+                              align: 'center'
+                          },
+                          b: {
+                              color: "#2d2d2d",
+                              fontSize: 8,
+                              align: 'center',
+                          }
+                      },
+                      position : 'inner',
+                  }
+              }
+          }
+      ],
+      dataset: {
+          source: chartData
+      }
+  }
+}
+
+
+
+
 module.exports = {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
+  barChartData,
+  pieChartData
 };

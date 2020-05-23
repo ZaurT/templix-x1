@@ -16,9 +16,9 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
-import ReactEcharts from 'echarts-for-react';
+import ReactEcharts from 'echarts-for-react'; 
 
-import echarts from 'echarts';
+
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -32,13 +32,14 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Funnel from "components/Funnel/Funnel.js";
+
 
 import { bugs, website, server } from "variables/general.js";
 
 import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
+  barChartData,
+  pieChartData,
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -129,96 +130,13 @@ export default function Dashboard() {
         <GridItem xs={12} sm={12} md={6}>
           <Card chart>
             <CardBody>
-              <h4 className={classes.cardTitle}>Daily Sales</h4>
-              <ReactEcharts
-              option={{
-                grid: {
-                    top: '6%',
-                    left: '1%',
-                    right: '3%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                tooltip: {
-                  trigger: 'none',
-                  axisPointer: {
-                      type: 'cross'
-                  }
-                },
-                xAxis: [
-                  {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-                    axisLine: {
-                      show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            type: 'dashed',
-                            color: '#eee'
-                        }
-                    },
-                  }
-                ],
-                yAxis: [
-                  {
-                      type: 'value',
-                      axisLine: {
-                        show: false
-                      },
-                      axisTick: {
-                          show: false
-                      },
-                      splitLine: {
-                        lineStyle: {
-                              type: 'dashed',
-                              color: '#eee'
-                          }
-                      },
-                  }
-                ],
-                series: [
-                    {
-                        name: 'Data',
-                        type: 'line',
-                        stack: 'Data1',
-                        lineStyle: {
-                          width: 2,
-                          shadowColor: 'rgba(244, 67, 54 ,1)',
-                          shadowBlur: 8,
-                          shadowOffsetY: 0
-                        },
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'top'
-                            }
-                        },
-                        smooth: true,
-                        itemStyle: {
-                          color: 'rgb(244, 67, 54)'
-                        },
-                        areaStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: 'rgb(244, 67, 54)'
-                            }, {
-                                offset: 1,
-                                color: 'rgba(255, 255, 255, 0)'
-                            }])
-                        },
-                        data: [220, 830, 550, 1200, 650]
-                    }
-                ]
-            }}
-            notMerge={true}
-            lazyUpdate={true}
-            style={{height: '170px', width: '100%'}}
-             />
+              <h4 className={classes.cardTitle}>Динамика склада</h4>
+              <ReactEcharts 
+                option={barChartData.option}
+                notMerge={true}
+                lazyUpdate={true}
+                style={{height: '200px', width: '100%'}} 
+              />
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
@@ -229,19 +147,15 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card chart>
-            <CardHeader color="warning">
-              <ChartistGraph
-                className="ct-chart"
-                data={emailsSubscriptionChart.data}
-                type="Bar"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
+          <CardBody>
+              <h4 className={classes.cardTitle}>Простой склада</h4>
+              <ReactEcharts 
+                option={pieChartData.option}
+                notMerge={true}
+                lazyUpdate={true}
+                style={{height: '200px', width: '100%'}} 
               />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
@@ -252,18 +166,9 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
           <Card chart>
-            <CardHeader color="danger">
-              <ChartistGraph
-                className="ct-chart"
-                data={completedTasksChart.data}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Воронка продаж</h4>
+              <Funnel />
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>

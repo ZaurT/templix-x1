@@ -145,7 +145,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={3}>
+        <GridItem xs={12} sm={6} md={3}>
           <Card chart>
           <CardBody>
               <h4 className={classes.cardTitle}>Простой склада</h4>
@@ -164,7 +164,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={3}>
+        <GridItem xs={12} sm={6} md={3}>
           <Card chart>
             <CardBody>
               <h4 className={classes.cardTitle}>Воронка продаж</h4>

@@ -9,6 +9,15 @@ const funnelStageStyle = {
     display: "table-row",
     "&:last-child svg": {
       display: "none"
+    },
+    "&:nth-child(1) $bg": {
+      opacity: 0.33
+    },
+    "&:nth-child(2) $bg": {
+      opacity: 0.66
+    },
+    "&:nth-child(3) $bg": {
+      opacity: 1
     }
   },
   title: {
@@ -22,13 +31,14 @@ const funnelStageStyle = {
     display: "table-cell",
     width: "100%",
     textAlign: "center",
-    fontSize: "21px"
+    fontSize: "21px",
+    position: "relative"
   },
   block: {
     width: "100%",
     height: "100%",
     position: "relative",
-    padding: "13px 0px",
+    padding: "8px 0px",
     display: "flex",
     display: "-webkit-flex",
     flexDirection: "row",
@@ -47,7 +57,6 @@ const funnelStageStyle = {
     margin: "0 auto",
     zIndex: "0",
     background: "#6da9d4",
-    opacity: "0.3333333333333333"
   },
   percentage: {
     fontSize: "12px",

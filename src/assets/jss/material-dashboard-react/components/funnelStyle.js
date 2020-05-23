@@ -8,7 +8,9 @@ const funnelStyle = {
   salesFunnel:{
     display: "table",
     width: "100%",
-    height: "200px"
+    height: "200px",
+    display: "table",
+    padding: "15px 0px"
   }
 };
 

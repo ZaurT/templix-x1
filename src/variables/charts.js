@@ -284,18 +284,17 @@ let chartData1 = [
   {value:5, onSale: 4, capability: 1500, purchases: 156000, proceeds: 400000, stock: 0, oldPrice: 5, inSystem: 1, inProgram: 1},
 ];
 let chartData2 = [
-  {value:4, onSale: 3, capability: 1500, purchases: 0, proceeds: 800000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1, selected: true},
-  {value:2, onSale: 1, capability: 1200, purchases: 0, proceeds: 100000, stock: 1, oldPrice: 1, inSystem: 1, inProgram: 1, selected: true},
-  {value:2, onSale: 2, capability: 1100, purchases: 0, proceeds: 5000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1, selected: true},
+  {value:5, onSale: 3, capability: 1500, purchases: 0, proceeds: 800000, stock: 1, oldPrice: 0, inSystem: 1, inProgram: 1, selected: true},
+  {value:4, onSale: 1, capability: 1200, purchases: 0, proceeds: 100000, stock: 1, oldPrice: 1, inSystem: 1, inProgram: 1, selected: true},
 ];
 let gapSize = 5; //percentage
 let chartColors = [
   "#a4d46d", 
-  "#e1e872", 
-  "#ffe16e", 
-  "#ffc247", 
+  "#bddf95", 
+  "#cee8b0", 
+  "#daeec4", 
+  "#e6f4d7", 
   "#f99090", 
-  "#ff5858"
 ];
 // render colors
 Array.prototype.colors = function (arr) {
